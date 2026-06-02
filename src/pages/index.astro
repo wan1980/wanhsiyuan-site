@@ -1,0 +1,62 @@
+---
+import Base from "../layouts/Base.astro";
+import { getCollection } from "astro:content";
+import sleeves from "../data/sleeves.json";
+
+const posts = (await getCollection("research"))
+  .sort((a, b) => b.data.date.localeCompare(a.data.date))
+  .slice(0, 3);
+
+const anchor = sleeves.anchor_date ?? "—";
+const updated = sleeves.last_updated ?? "pending first run";
+const macd = sleeves.macddaddy_pct;
+const spy = sleeves.spy_pct;
+const fmtPct = (v: number | null | undefined) =>
+  v == null ? "—" : `${v >= 0 ? "+" : ""}${v.toFixed(2)}%`;
+---
+<Base title="Macddaddy" path="/">
+  <section class="hero">
+    <h1>Macddaddy</h1>
+    <p class="tagline">Systematic trading systems, walk-forward proven.</p>
+  </section>
+
+  <p>
+    Macddaddy runs a small book of systematic equity and crypto strategies
+    on <a href="https://collective2.com" rel="noopener">Collective2</a>.
+    Every strategy is validated with walk-forward testing before it ever
+    fires, and risk-adjusted return (Sharpe, max drawdown) is prioritized
+    over raw return.
+  </p>
+
+  <h2>Performance</h2>
+  <div class="curve-card">
+    <div class="curve-meta">
+      <span>cumulative return since {anchor}</span>
+      <span>updated {updated}</span>
+    </div>
+    <img src="/curves/sleeves.svg" alt="Macddaddy cumulative return vs SPY" />
+    {macd != null && (
+      <div style="display: flex; gap: 2rem; margin-top: 1rem; font-family: var(--mono); font-size: 0.875rem;">
+        <span><span style="color: var(--accent);">●</span> Macddaddy <strong>{fmtPct(macd)}</strong></span>
+        <span><span style="color: var(--fg-dim);">●</span> SPY <strong style="color: var(--fg-dim);">{fmtPct(spy)}</strong></span>
+      </div>
+    )}
+  </div>
+  <p style="font-size: 0.875rem; color: var(--fg-dim);">
+    Cumulative percent return from the anchor date. Refreshed daily after
+    the US equity close.
+  </p>
+
+  <h2>Latest research</h2>
+  <ul class="post-list">
+    {posts.map((post) => (
+      <li>
+        <div class="post-date">{post.data.date}</div>
+        <div class="post-title">
+          <a href={`/research/${post.slug}`}>{post.data.title}</a>
+        </div>
+        <p class="post-summary">{post.data.summary}</p>
+      </li>
+    ))}
+  </ul>
+</Base>

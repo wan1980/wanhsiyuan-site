@@ -1,0 +1,46 @@
+---
+import "../styles/global.css";
+export interface Props {
+  title: string;
+  description?: string;
+  path?: string;
+}
+const { title, description, path = "/" } = Astro.props;
+const ogTitle = title === "Macddaddy" ? title : `${title} — Macddaddy`;
+const desc =
+  description ??
+  "Systematic trading systems, walk-forward proven. Equity, crypto, and signal research.";
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <title>{ogTitle}</title>
+    <meta name="description" content={desc} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={`https://wanhsiyuan.com${path}`} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <div class="container">
+      <nav class="nav">
+        <a href="/" class="brand">MACDDADDY</a>
+        <span class="links">
+          <a href="/research" class={path.startsWith("/research") ? "active" : ""}>Research</a>
+          <a href="/about" class={path === "/about" ? "active" : ""}>About</a>
+        </span>
+      </nav>
+      <main>
+        <slot />
+      </main>
+      <footer class="footer">
+        <span>© {new Date().getFullYear()} Macddaddy</span>
+        <span>Not investment advice</span>
+      </footer>
+    </div>
+  </body>
+</html>

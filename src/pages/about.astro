@@ -1,0 +1,42 @@
+---
+import Base from "../layouts/Base.astro";
+---
+<Base title="About" path="/about">
+  <section class="hero">
+    <h1>About</h1>
+    <p class="tagline">What Macddaddy is, and what it isn't.</p>
+  </section>
+
+  <p>
+    Macddaddy is a small, owner-operated systematic trading book. Strategies
+    are designed, backtested, and walk-forward validated before any capital
+    is committed. Picks are debated by an automated review pipeline before
+    they fire; overrides happen, but they are logged.
+  </p>
+
+  <h2>The research process</h2>
+  <p>
+    Every signal goes through three checks before it earns capital:
+  </p>
+  <ul>
+    <li>A clean in-sample backtest beating SPY by a meaningful margin.</li>
+    <li>A walk-forward split with Sharpe positively correlated across halves.</li>
+    <li>An honest accounting of fees, slippage, and turnover drag.</li>
+  </ul>
+  <p>
+    Raw return is a vanity metric. Risk-adjusted return (Sharpe, max drawdown)
+    is what drives whether a signal is shipped.
+  </p>
+
+  <h2>What this site is</h2>
+  <p>
+    A public window onto the sleeve performance and the research that backs
+    it. No live positions, no fills, no signals. Just outcomes and writeups.
+  </p>
+
+  <h2>Disclaimer</h2>
+  <p style="color: var(--fg-dim); font-size: 0.875rem;">
+    Nothing on this site is investment advice. Past performance does not
+    guarantee future results. Systematic strategies can and do lose money.
+  </p>
+</Base>
