@@ -1,62 +1,45 @@
----
-import Base from "../layouts/Base.astro";
-import { getCollection } from "astro:content";
-import sleeves from "../data/sleeves.json";
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#ffffff">
+    <title>Wan Hsi Yuan — I build things.</title>
+    <meta name="description" content="I’m Wan Hsi. I build things in real estate, software, and technology. I turn ideas into places, products, and things people use.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Wan Hsi Yuan — I build things.">
+    <meta property="og:description" content="Real estate. Software. Technology. I turn ideas into places, products, and things people use.">
+    <link rel="canonical" href="https://wanhsiyuan.com/">
+    <meta property="og:url" content="https://wanhsiyuan.com/">
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <div class="page">
+      <header class="masthead">
+        <p class="name">Wan Hsi Yuan</p>
+        <svg class="asterisk" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M16 2v28M3.875 9l24.25 14M3.875 23l24.25-14" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+      </header>
 
-const posts = (await getCollection("research"))
-  .sort((a, b) => b.data.date.localeCompare(a.data.date))
-  .slice(0, 3);
-
-const anchor = sleeves.anchor_date ?? "—";
-const updated = sleeves.last_updated ?? "pending first run";
-const macd = sleeves.macddaddy_pct;
-const spy = sleeves.spy_pct;
-const fmtPct = (v: number | null | undefined) =>
-  v == null ? "—" : `${v >= 0 ? "+" : ""}${v.toFixed(2)}%`;
----
-<Base title="Macddaddy" path="/">
-  <section class="hero">
-    <h1>Macddaddy</h1>
-    <p class="tagline">Systematic trading systems, walk-forward proven.</p>
-  </section>
-
-  <p>
-    Macddaddy runs a small book of systematic equity and crypto strategies
-    on <a href="https://collective2.com" rel="noopener">Collective2</a>.
-    Every strategy is validated with walk-forward testing before it ever
-    fires, and risk-adjusted return (Sharpe, max drawdown) is prioritized
-    over raw return.
-  </p>
-
-  <h2>Performance</h2>
-  <div class="curve-card">
-    <div class="curve-meta">
-      <span>cumulative return since {anchor}</span>
-      <span>updated {updated}</span>
-    </div>
-    <img src="/curves/sleeves.svg" alt="Macddaddy cumulative return vs SPY" />
-    {macd != null && (
-      <div style="display: flex; gap: 2rem; margin-top: 1rem; font-family: var(--mono); font-size: 0.875rem;">
-        <span><span style="color: var(--accent);">●</span> Macddaddy <strong>{fmtPct(macd)}</strong></span>
-        <span><span style="color: var(--fg-dim);">●</span> SPY <strong style="color: var(--fg-dim);">{fmtPct(spy)}</strong></span>
-      </div>
-    )}
-  </div>
-  <p style="font-size: 0.875rem; color: var(--fg-dim);">
-    Cumulative percent return from the anchor date. Refreshed daily after
-    the US equity close.
-  </p>
-
-  <h2>Latest research</h2>
-  <ul class="post-list">
-    {posts.map((post) => (
-      <li>
-        <div class="post-date">{post.data.date}</div>
-        <div class="post-title">
-          <a href={`/research/${post.slug}`}>{post.data.title}</a>
+      <main class="intro">
+        <div class="words">
+          <h1>I build<br>things.</h1>
+          <p class="focus">Real estate. Software. Technology.</p>
+          <p class="about">I’m Wan Hsi. I turn ideas into places,<br class="desktop-break"> products, and things people use.</p>
         </div>
-        <p class="post-summary">{post.data.summary}</p>
-      </li>
-    ))}
-  </ul>
-</Base>
+        <picture class="portrait">
+          <source srcset="./assets/wan-hsi-yuan.webp" type="image/webp">
+          <img src="./assets/wan-hsi-yuan.jpg" width="1350" height="2400" alt="Wan Hsi Yuan sitting in the sun beside a white geometric structure, wearing sunglasses and headphones." fetchpriority="high" decoding="async">
+        </picture>
+      </main>
+
+      <footer class="footer">
+        <p>Always building. Always curious.</p>
+        <p>wanhsiyuan.com</p>
+      </footer>
+    </div>
+  </body>
+</html>

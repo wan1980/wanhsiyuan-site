@@ -1,6 +1,10 @@
 # wanhsiyuan-site
 
-Static site for [wanhsiyuan.com](https://wanhsiyuan.com). Astro + Cloudflare Pages.
+Personal website for [wanhsiyuan.com](https://wanhsiyuan.com): Wan Hsi Yuan builds things in real estate, software, and technology. Astro + Cloudflare Pages.
+
+The homepage uses semantic HTML, local CSS, and a personal portrait with no browser JavaScript or external font requests. Its photo is supplied in WebP and JPEG with EXIF metadata removed. Existing research routes remain available at their original URLs.
+
+Homepage: `src/pages/index.astro`. Styles: `public/style.css`. Photo: `public/assets/wan-hsi-yuan.webp` and `.jpg`.
 
 ## Develop
 
