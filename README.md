@@ -1,6 +1,6 @@
 # wanhsiyuan-site
 
-Personal website for [wanhsiyuan.com](https://wanhsiyuan.com): Wan Hsi Yuan builds things in real estate, software, and technology. Astro + Cloudflare Pages.
+Personal website for [wanhsiyuan.com](https://wanhsiyuan.com): Wan Hsi Yuan builds things in real estate, software, and technology. Built with Astro and hosted with Cloudflare Workers Static Assets.
 
 The homepage uses semantic HTML, local CSS, and a personal portrait with no browser JavaScript or external font requests. Its photo is supplied in WebP and JPEG with EXIF metadata removed. Existing research routes remain available at their original URLs.
 
@@ -20,6 +20,18 @@ npm run build
 ```
 
 Outputs to `dist/`.
+
+## Deploy
+
+```sh
+npm run deploy
+```
+
+Cloudflare authentication is required (`npx wrangler login` when not already signed in). The repository pins Wrangler and keeps the hosting configuration in `wrangler.jsonc`. Only the built `dist/` files are uploaded; credentials and local mockups are not published.
+
+The `wanhsiyuan-site` Worker serves both `wanhsiyuan.com/*` and `www.wanhsiyuan.com/*` through Cloudflare routes on the existing proxied hostnames. The DNS records are externally managed, so these routes replace the site at Cloudflare's edge without changing those records. The Worker serves static files and does not forward requests to the former login app. Other subdomains are managed independently.
+
+Pushing to GitHub saves the source; run `npm run deploy` to publish future changes.
 
 ## Curve refresh
 
